@@ -1,2 +1,0 @@
-# fridastya.github.io
-test
