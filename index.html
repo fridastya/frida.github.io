@@ -1,10 +1,591 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>UNDER RECONTRUCTION</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    Coming Soon :)
-  </body>
+	<head>
+		<link rel="shortcut icon" type="image/x-icon" href="https://kominfo.batam.go.id/wp-content/uploads/sites/2/2018/02/cropped-cropped-LOGO_KOTA_BATAM-32x32.png" />
+		<title>Undian Literasi - Diskominfo Batam</title>
+		<style>
+			text{
+        font-family:Helvetica, Arial, sans-serif;
+        font-size:11px;
+        pointer-events:none;
+    }
+    #chart{
+        position:absolute;
+        width:500px;
+        height:500px;
+        top:150px;
+        left:300px;
+    }
+    #question{
+        position: absolute;
+        width:400px;
+        height:500px;
+        top:300px;
+        left:1060px;
+    }
+    #question h1{
+        font-size: 50px;
+        font-weight: bold;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        top:50%;
+        -webkit-transform:translate(0,-50%);
+                transform:translate(0,-50%);
+    }
+		</style>
+	</head>
+	<body>
+		<div style="margin: auto; text-align: center; font-family:Helvetica, Arial, sans-serif;">
+			<img src="https://disbudpar.batam.go.id/wp-content/uploads/sites/22/2020/01/pemko-2-1024x724.png" height="50">
+			<h1>Doorprize Literasi Digital 2023</h1>
+			<h5>Dinas Komunikasi dan Informatika Kota Batam</h5>
+		</div>
+		<div>
+			<div id="chart"></div>
+    			<div id="question"><h1></h1></div>
+		</div>
+
+    		<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+	<script>
+		var padding = {top:20, right:40, bottom:0, left:0},
+            w = 750 - padding.left - padding.right,
+            h = 750 - padding.top  - padding.bottom,
+            r = Math.min(w, h)/2,
+            rotation = 0,
+            oldrotation = 0,
+            picked = 100000,
+            oldpick = [],
+            color = d3.scale.category20();//category20c()
+            //randomNumbers = getRandomNumbers();
+        //http://osric.com/bingo-card-generator/?title=HTML+and+CSS+BINGO!&words=padding%2Cfont-family%2Ccolor%2Cfont-weight%2Cfont-size%2Cbackground-color%2Cnesting%2Cbottom%2Csans-serif%2Cperiod%2Cpound+sign%2C%EF%B9%A4body%EF%B9%A5%2C%EF%B9%A4ul%EF%B9%A5%2C%EF%B9%A4h1%EF%B9%A5%2Cmargin%2C%3C++%3E%2C{+}%2C%EF%B9%A4p%EF%B9%A5%2C%EF%B9%A4!DOCTYPE+html%EF%B9%A5%2C%EF%B9%A4head%EF%B9%A5%2Ccolon%2C%EF%B9%A4style%EF%B9%A5%2C.html%2CHTML%2CCSS%2CJavaScript%2Cborder&freespace=true&freespaceValue=Web+Design+Master&freespaceRandom=false&width=5&height=5&number=35#results
+        var data = [
+{"label":1,"value":1, "question":"Nomor Terpilih: 1"},
+{"label":2,"value":2, "question":"Nomor Terpilih: 2"},
+{"label":3,"value":3, "question":"Nomor Terpilih: 3"},
+{"label":4,"value":4, "question":"Nomor Terpilih: 4"},
+{"label":5,"value":5, "question":"Nomor Terpilih: 5"},
+{"label":6,"value":6, "question":"Nomor Terpilih: 6"},
+{"label":7,"value":7, "question":"Nomor Terpilih: 7"},
+{"label":8,"value":8, "question":"Nomor Terpilih: 8"},
+{"label":9,"value":9, "question":"Nomor Terpilih: 9"},
+{"label":10,"value":10, "question":"Nomor Terpilih: 10"},
+{"label":11,"value":11, "question":"Nomor Terpilih: 11"},
+{"label":12,"value":12, "question":"Nomor Terpilih: 12"},
+{"label":13,"value":13, "question":"Nomor Terpilih: 13"},
+{"label":14,"value":14, "question":"Nomor Terpilih: 14"},
+{"label":15,"value":15, "question":"Nomor Terpilih: 15"},
+{"label":16,"value":16, "question":"Nomor Terpilih: 16"},
+{"label":17,"value":17, "question":"Nomor Terpilih: 17"},
+{"label":18,"value":18, "question":"Nomor Terpilih: 18"},
+{"label":19,"value":19, "question":"Nomor Terpilih: 19"},
+{"label":20,"value":20, "question":"Nomor Terpilih: 20"},
+{"label":21,"value":21, "question":"Nomor Terpilih: 21"},
+{"label":22,"value":22, "question":"Nomor Terpilih: 22"},
+{"label":23,"value":23, "question":"Nomor Terpilih: 23"},
+{"label":24,"value":24, "question":"Nomor Terpilih: 24"},
+{"label":25,"value":25, "question":"Nomor Terpilih: 25"},
+{"label":26,"value":26, "question":"Nomor Terpilih: 26"},
+{"label":27,"value":27, "question":"Nomor Terpilih: 27"},
+{"label":28,"value":28, "question":"Nomor Terpilih: 28"},
+{"label":29,"value":29, "question":"Nomor Terpilih: 29"},
+{"label":30,"value":30, "question":"Nomor Terpilih: 30"},
+{"label":31,"value":31, "question":"Nomor Terpilih: 31"},
+{"label":32,"value":32, "question":"Nomor Terpilih: 32"},
+{"label":33,"value":33, "question":"Nomor Terpilih: 33"},
+{"label":34,"value":34, "question":"Nomor Terpilih: 34"},
+{"label":35,"value":35, "question":"Nomor Terpilih: 35"},
+{"label":36,"value":36, "question":"Nomor Terpilih: 36"},
+{"label":37,"value":37, "question":"Nomor Terpilih: 37"},
+{"label":38,"value":38, "question":"Nomor Terpilih: 38"},
+{"label":39,"value":39, "question":"Nomor Terpilih: 39"},
+{"label":40,"value":40, "question":"Nomor Terpilih: 40"},
+{"label":41,"value":41, "question":"Nomor Terpilih: 41"},
+{"label":42,"value":42, "question":"Nomor Terpilih: 42"},
+{"label":43,"value":43, "question":"Nomor Terpilih: 43"},
+{"label":44,"value":44, "question":"Nomor Terpilih: 44"},
+{"label":45,"value":45, "question":"Nomor Terpilih: 45"},
+{"label":46,"value":46, "question":"Nomor Terpilih: 46"},
+{"label":47,"value":47, "question":"Nomor Terpilih: 47"},
+{"label":48,"value":48, "question":"Nomor Terpilih: 48"},
+{"label":49,"value":49, "question":"Nomor Terpilih: 49"},
+{"label":50,"value":50, "question":"Nomor Terpilih: 50"},
+{"label":51,"value":51, "question":"Nomor Terpilih: 51"},
+{"label":52,"value":52, "question":"Nomor Terpilih: 52"},
+{"label":53,"value":53, "question":"Nomor Terpilih: 53"},
+{"label":54,"value":54, "question":"Nomor Terpilih: 54"},
+{"label":55,"value":55, "question":"Nomor Terpilih: 55"},
+{"label":56,"value":56, "question":"Nomor Terpilih: 56"},
+{"label":57,"value":57, "question":"Nomor Terpilih: 57"},
+{"label":58,"value":58, "question":"Nomor Terpilih: 58"},
+{"label":59,"value":59, "question":"Nomor Terpilih: 59"},
+{"label":60,"value":60, "question":"Nomor Terpilih: 60"},
+{"label":61,"value":61, "question":"Nomor Terpilih: 61"},
+{"label":62,"value":62, "question":"Nomor Terpilih: 62"},
+{"label":63,"value":63, "question":"Nomor Terpilih: 63"},
+{"label":64,"value":64, "question":"Nomor Terpilih: 64"},
+{"label":65,"value":65, "question":"Nomor Terpilih: 65"},
+{"label":66,"value":66, "question":"Nomor Terpilih: 66"},
+{"label":67,"value":67, "question":"Nomor Terpilih: 67"},
+{"label":68,"value":68, "question":"Nomor Terpilih: 68"},
+{"label":69,"value":69, "question":"Nomor Terpilih: 69"},
+{"label":70,"value":70, "question":"Nomor Terpilih: 70"},
+{"label":71,"value":71, "question":"Nomor Terpilih: 71"},
+{"label":72,"value":72, "question":"Nomor Terpilih: 72"},
+{"label":73,"value":73, "question":"Nomor Terpilih: 73"},
+{"label":74,"value":74, "question":"Nomor Terpilih: 74"},
+{"label":75,"value":75, "question":"Nomor Terpilih: 75"},
+{"label":76,"value":76, "question":"Nomor Terpilih: 76"},
+{"label":77,"value":77, "question":"Nomor Terpilih: 77"},
+{"label":78,"value":78, "question":"Nomor Terpilih: 78"},
+{"label":79,"value":79, "question":"Nomor Terpilih: 79"},
+{"label":80,"value":80, "question":"Nomor Terpilih: 80"},
+{"label":81,"value":81, "question":"Nomor Terpilih: 81"},
+{"label":82,"value":82, "question":"Nomor Terpilih: 82"},
+{"label":83,"value":83, "question":"Nomor Terpilih: 83"},
+{"label":84,"value":84, "question":"Nomor Terpilih: 84"},
+{"label":85,"value":85, "question":"Nomor Terpilih: 85"},
+{"label":86,"value":86, "question":"Nomor Terpilih: 86"},
+{"label":87,"value":87, "question":"Nomor Terpilih: 87"},
+{"label":88,"value":88, "question":"Nomor Terpilih: 88"},
+{"label":89,"value":89, "question":"Nomor Terpilih: 89"},
+{"label":90,"value":90, "question":"Nomor Terpilih: 90"},
+{"label":91,"value":91, "question":"Nomor Terpilih: 91"},
+{"label":92,"value":92, "question":"Nomor Terpilih: 92"},
+{"label":93,"value":93, "question":"Nomor Terpilih: 93"},
+{"label":94,"value":94, "question":"Nomor Terpilih: 94"},
+{"label":95,"value":95, "question":"Nomor Terpilih: 95"},
+{"label":96,"value":96, "question":"Nomor Terpilih: 96"},
+{"label":97,"value":97, "question":"Nomor Terpilih: 97"},
+{"label":98,"value":98, "question":"Nomor Terpilih: 98"},
+{"label":99,"value":99, "question":"Nomor Terpilih: 99"},
+{"label":100,"value":100, "question":"Nomor Terpilih: 100"},
+{"label":101,"value":101, "question":"Nomor Terpilih: 101"},
+{"label":102,"value":102, "question":"Nomor Terpilih: 102"},
+{"label":103,"value":103, "question":"Nomor Terpilih: 103"},
+{"label":104,"value":104, "question":"Nomor Terpilih: 104"},
+{"label":105,"value":105, "question":"Nomor Terpilih: 105"},
+{"label":106,"value":106, "question":"Nomor Terpilih: 106"},
+{"label":107,"value":107, "question":"Nomor Terpilih: 107"},
+{"label":108,"value":108, "question":"Nomor Terpilih: 108"},
+{"label":109,"value":109, "question":"Nomor Terpilih: 109"},
+{"label":110,"value":110, "question":"Nomor Terpilih: 110"},
+{"label":111,"value":111, "question":"Nomor Terpilih: 111"},
+{"label":112,"value":112, "question":"Nomor Terpilih: 112"},
+{"label":113,"value":113, "question":"Nomor Terpilih: 113"},
+{"label":114,"value":114, "question":"Nomor Terpilih: 114"},
+{"label":115,"value":115, "question":"Nomor Terpilih: 115"},
+{"label":116,"value":116, "question":"Nomor Terpilih: 116"},
+{"label":117,"value":117, "question":"Nomor Terpilih: 117"},
+{"label":118,"value":118, "question":"Nomor Terpilih: 118"},
+{"label":119,"value":119, "question":"Nomor Terpilih: 119"},
+{"label":120,"value":120, "question":"Nomor Terpilih: 120"},
+{"label":121,"value":121, "question":"Nomor Terpilih: 121"},
+{"label":122,"value":122, "question":"Nomor Terpilih: 122"},
+{"label":123,"value":123, "question":"Nomor Terpilih: 123"},
+{"label":124,"value":124, "question":"Nomor Terpilih: 124"},
+{"label":125,"value":125, "question":"Nomor Terpilih: 125"},
+{"label":126,"value":126, "question":"Nomor Terpilih: 126"},
+{"label":127,"value":127, "question":"Nomor Terpilih: 127"},
+{"label":128,"value":128, "question":"Nomor Terpilih: 128"},
+{"label":129,"value":129, "question":"Nomor Terpilih: 129"},
+{"label":130,"value":130, "question":"Nomor Terpilih: 130"},
+{"label":131,"value":131, "question":"Nomor Terpilih: 131"},
+{"label":132,"value":132, "question":"Nomor Terpilih: 132"},
+{"label":133,"value":133, "question":"Nomor Terpilih: 133"},
+{"label":134,"value":134, "question":"Nomor Terpilih: 134"},
+{"label":135,"value":135, "question":"Nomor Terpilih: 135"},
+{"label":136,"value":136, "question":"Nomor Terpilih: 136"},
+{"label":137,"value":137, "question":"Nomor Terpilih: 137"},
+{"label":138,"value":138, "question":"Nomor Terpilih: 138"},
+{"label":139,"value":139, "question":"Nomor Terpilih: 139"},
+{"label":140,"value":140, "question":"Nomor Terpilih: 140"},
+{"label":141,"value":141, "question":"Nomor Terpilih: 141"},
+{"label":142,"value":142, "question":"Nomor Terpilih: 142"},
+{"label":143,"value":143, "question":"Nomor Terpilih: 143"},
+{"label":144,"value":144, "question":"Nomor Terpilih: 144"},
+{"label":145,"value":145, "question":"Nomor Terpilih: 145"},
+{"label":146,"value":146, "question":"Nomor Terpilih: 146"},
+{"label":147,"value":147, "question":"Nomor Terpilih: 147"},
+{"label":148,"value":148, "question":"Nomor Terpilih: 148"},
+{"label":149,"value":149, "question":"Nomor Terpilih: 149"},
+{"label":150,"value":150, "question":"Nomor Terpilih: 150"},
+{"label":151,"value":151, "question":"Nomor Terpilih: 151"},
+{"label":152,"value":152, "question":"Nomor Terpilih: 152"},
+{"label":153,"value":153, "question":"Nomor Terpilih: 153"},
+{"label":154,"value":154, "question":"Nomor Terpilih: 154"},
+{"label":155,"value":155, "question":"Nomor Terpilih: 155"},
+{"label":156,"value":156, "question":"Nomor Terpilih: 156"},
+{"label":157,"value":157, "question":"Nomor Terpilih: 157"},
+{"label":158,"value":158, "question":"Nomor Terpilih: 158"},
+{"label":159,"value":159, "question":"Nomor Terpilih: 159"},
+{"label":160,"value":160, "question":"Nomor Terpilih: 160"},
+{"label":161,"value":161, "question":"Nomor Terpilih: 161"},
+{"label":162,"value":162, "question":"Nomor Terpilih: 162"},
+{"label":163,"value":163, "question":"Nomor Terpilih: 163"},
+{"label":164,"value":164, "question":"Nomor Terpilih: 164"},
+{"label":165,"value":165, "question":"Nomor Terpilih: 165"},
+{"label":166,"value":166, "question":"Nomor Terpilih: 166"},
+{"label":167,"value":167, "question":"Nomor Terpilih: 167"},
+{"label":168,"value":168, "question":"Nomor Terpilih: 168"},
+{"label":169,"value":169, "question":"Nomor Terpilih: 169"},
+{"label":170,"value":170, "question":"Nomor Terpilih: 170"},
+{"label":171,"value":171, "question":"Nomor Terpilih: 171"},
+{"label":172,"value":172, "question":"Nomor Terpilih: 172"},
+{"label":173,"value":173, "question":"Nomor Terpilih: 173"},
+{"label":174,"value":174, "question":"Nomor Terpilih: 174"},
+{"label":175,"value":175, "question":"Nomor Terpilih: 175"},
+{"label":176,"value":176, "question":"Nomor Terpilih: 176"},
+{"label":177,"value":177, "question":"Nomor Terpilih: 177"},
+{"label":178,"value":178, "question":"Nomor Terpilih: 178"},
+{"label":179,"value":179, "question":"Nomor Terpilih: 179"},
+{"label":180,"value":180, "question":"Nomor Terpilih: 180"},
+{"label":181,"value":181, "question":"Nomor Terpilih: 181"},
+{"label":182,"value":182, "question":"Nomor Terpilih: 182"},
+{"label":183,"value":183, "question":"Nomor Terpilih: 183"},
+{"label":184,"value":184, "question":"Nomor Terpilih: 184"},
+{"label":185,"value":185, "question":"Nomor Terpilih: 185"},
+{"label":186,"value":186, "question":"Nomor Terpilih: 186"},
+{"label":187,"value":187, "question":"Nomor Terpilih: 187"},
+{"label":188,"value":188, "question":"Nomor Terpilih: 188"},
+{"label":189,"value":189, "question":"Nomor Terpilih: 189"},
+{"label":190,"value":190, "question":"Nomor Terpilih: 190"},
+{"label":191,"value":191, "question":"Nomor Terpilih: 191"},
+{"label":192,"value":192, "question":"Nomor Terpilih: 192"},
+{"label":193,"value":193, "question":"Nomor Terpilih: 193"},
+{"label":194,"value":194, "question":"Nomor Terpilih: 194"},
+{"label":195,"value":195, "question":"Nomor Terpilih: 195"},
+{"label":196,"value":196, "question":"Nomor Terpilih: 196"},
+{"label":197,"value":197, "question":"Nomor Terpilih: 197"},
+{"label":198,"value":198, "question":"Nomor Terpilih: 198"},
+{"label":199,"value":199, "question":"Nomor Terpilih: 199"},
+{"label":200,"value":200, "question":"Nomor Terpilih: 200"},
+{"label":201,"value":201, "question":"Nomor Terpilih: 201"},
+{"label":202,"value":202, "question":"Nomor Terpilih: 202"},
+{"label":203,"value":203, "question":"Nomor Terpilih: 203"},
+{"label":204,"value":204, "question":"Nomor Terpilih: 204"},
+{"label":205,"value":205, "question":"Nomor Terpilih: 205"},
+{"label":206,"value":206, "question":"Nomor Terpilih: 206"},
+{"label":207,"value":207, "question":"Nomor Terpilih: 207"},
+{"label":208,"value":208, "question":"Nomor Terpilih: 208"},
+{"label":209,"value":209, "question":"Nomor Terpilih: 209"},
+{"label":210,"value":210, "question":"Nomor Terpilih: 210"},
+{"label":211,"value":211, "question":"Nomor Terpilih: 211"},
+{"label":212,"value":212, "question":"Nomor Terpilih: 212"},
+{"label":213,"value":213, "question":"Nomor Terpilih: 213"},
+{"label":214,"value":214, "question":"Nomor Terpilih: 214"},
+{"label":215,"value":215, "question":"Nomor Terpilih: 215"},
+{"label":216,"value":216, "question":"Nomor Terpilih: 216"},
+{"label":217,"value":217, "question":"Nomor Terpilih: 217"},
+{"label":218,"value":218, "question":"Nomor Terpilih: 218"},
+{"label":219,"value":219, "question":"Nomor Terpilih: 219"},
+{"label":220,"value":220, "question":"Nomor Terpilih: 220"},
+{"label":221,"value":221, "question":"Nomor Terpilih: 221"},
+{"label":222,"value":222, "question":"Nomor Terpilih: 222"},
+{"label":223,"value":223, "question":"Nomor Terpilih: 223"},
+{"label":224,"value":224, "question":"Nomor Terpilih: 224"},
+{"label":225,"value":225, "question":"Nomor Terpilih: 225"},
+{"label":226,"value":226, "question":"Nomor Terpilih: 226"},
+{"label":227,"value":227, "question":"Nomor Terpilih: 227"},
+{"label":228,"value":228, "question":"Nomor Terpilih: 228"},
+{"label":229,"value":229, "question":"Nomor Terpilih: 229"},
+{"label":230,"value":230, "question":"Nomor Terpilih: 230"},
+{"label":231,"value":231, "question":"Nomor Terpilih: 231"},
+{"label":232,"value":232, "question":"Nomor Terpilih: 232"},
+{"label":233,"value":233, "question":"Nomor Terpilih: 233"},
+{"label":234,"value":234, "question":"Nomor Terpilih: 234"},
+{"label":235,"value":235, "question":"Nomor Terpilih: 235"},
+{"label":236,"value":236, "question":"Nomor Terpilih: 236"},
+{"label":237,"value":237, "question":"Nomor Terpilih: 237"},
+{"label":238,"value":238, "question":"Nomor Terpilih: 238"},
+{"label":239,"value":239, "question":"Nomor Terpilih: 239"},
+{"label":240,"value":240, "question":"Nomor Terpilih: 240"},
+{"label":241,"value":241, "question":"Nomor Terpilih: 241"},
+{"label":242,"value":242, "question":"Nomor Terpilih: 242"},
+{"label":243,"value":243, "question":"Nomor Terpilih: 243"},
+{"label":244,"value":244, "question":"Nomor Terpilih: 244"},
+{"label":245,"value":245, "question":"Nomor Terpilih: 245"},
+{"label":246,"value":246, "question":"Nomor Terpilih: 246"},
+{"label":247,"value":247, "question":"Nomor Terpilih: 247"},
+{"label":248,"value":248, "question":"Nomor Terpilih: 248"},
+{"label":249,"value":249, "question":"Nomor Terpilih: 249"},
+{"label":250,"value":250, "question":"Nomor Terpilih: 250"},
+{"label":251,"value":251, "question":"Nomor Terpilih: 251"},
+{"label":252,"value":252, "question":"Nomor Terpilih: 252"},
+{"label":253,"value":253, "question":"Nomor Terpilih: 253"},
+{"label":254,"value":254, "question":"Nomor Terpilih: 254"},
+{"label":255,"value":255, "question":"Nomor Terpilih: 255"},
+{"label":256,"value":256, "question":"Nomor Terpilih: 256"},
+{"label":257,"value":257, "question":"Nomor Terpilih: 257"},
+{"label":258,"value":258, "question":"Nomor Terpilih: 258"},
+{"label":259,"value":259, "question":"Nomor Terpilih: 259"},
+{"label":260,"value":260, "question":"Nomor Terpilih: 260"},
+{"label":261,"value":261, "question":"Nomor Terpilih: 261"},
+{"label":262,"value":262, "question":"Nomor Terpilih: 262"},
+{"label":263,"value":263, "question":"Nomor Terpilih: 263"},
+{"label":264,"value":264, "question":"Nomor Terpilih: 264"},
+{"label":265,"value":265, "question":"Nomor Terpilih: 265"},
+{"label":266,"value":266, "question":"Nomor Terpilih: 266"},
+{"label":267,"value":267, "question":"Nomor Terpilih: 267"},
+{"label":268,"value":268, "question":"Nomor Terpilih: 268"},
+{"label":269,"value":269, "question":"Nomor Terpilih: 269"},
+{"label":270,"value":270, "question":"Nomor Terpilih: 270"},
+{"label":271,"value":271, "question":"Nomor Terpilih: 271"},
+{"label":272,"value":272, "question":"Nomor Terpilih: 272"},
+{"label":273,"value":273, "question":"Nomor Terpilih: 273"},
+{"label":274,"value":274, "question":"Nomor Terpilih: 274"},
+{"label":275,"value":275, "question":"Nomor Terpilih: 275"},
+{"label":276,"value":276, "question":"Nomor Terpilih: 276"},
+{"label":277,"value":277, "question":"Nomor Terpilih: 277"},
+{"label":278,"value":278, "question":"Nomor Terpilih: 278"},
+{"label":279,"value":279, "question":"Nomor Terpilih: 279"},
+{"label":280,"value":280, "question":"Nomor Terpilih: 280"},
+{"label":281,"value":281, "question":"Nomor Terpilih: 281"},
+{"label":282,"value":282, "question":"Nomor Terpilih: 282"},
+{"label":283,"value":283, "question":"Nomor Terpilih: 283"},
+{"label":284,"value":284, "question":"Nomor Terpilih: 284"},
+{"label":285,"value":285, "question":"Nomor Terpilih: 285"},
+{"label":286,"value":286, "question":"Nomor Terpilih: 286"},
+{"label":287,"value":287, "question":"Nomor Terpilih: 287"},
+{"label":288,"value":288, "question":"Nomor Terpilih: 288"},
+{"label":289,"value":289, "question":"Nomor Terpilih: 289"},
+{"label":290,"value":290, "question":"Nomor Terpilih: 290"},
+{"label":291,"value":291, "question":"Nomor Terpilih: 291"},
+{"label":292,"value":292, "question":"Nomor Terpilih: 292"},
+{"label":293,"value":293, "question":"Nomor Terpilih: 293"},
+{"label":294,"value":294, "question":"Nomor Terpilih: 294"},
+{"label":295,"value":295, "question":"Nomor Terpilih: 295"},
+{"label":296,"value":296, "question":"Nomor Terpilih: 296"},
+{"label":297,"value":297, "question":"Nomor Terpilih: 297"},
+{"label":298,"value":298, "question":"Nomor Terpilih: 298"},
+{"label":299,"value":299, "question":"Nomor Terpilih: 299"},
+{"label":300,"value":300, "question":"Nomor Terpilih: 300"},
+{"label":301,"value":301, "question":"Nomor Terpilih: 301"},
+{"label":302,"value":302, "question":"Nomor Terpilih: 302"},
+{"label":303,"value":303, "question":"Nomor Terpilih: 303"},
+{"label":304,"value":304, "question":"Nomor Terpilih: 304"},
+{"label":305,"value":305, "question":"Nomor Terpilih: 305"},
+{"label":306,"value":306, "question":"Nomor Terpilih: 306"},
+{"label":307,"value":307, "question":"Nomor Terpilih: 307"},
+{"label":308,"value":308, "question":"Nomor Terpilih: 308"},
+{"label":309,"value":309, "question":"Nomor Terpilih: 309"},
+{"label":310,"value":310, "question":"Nomor Terpilih: 310"},
+{"label":311,"value":311, "question":"Nomor Terpilih: 311"},
+{"label":312,"value":312, "question":"Nomor Terpilih: 312"},
+{"label":313,"value":313, "question":"Nomor Terpilih: 313"},
+{"label":314,"value":314, "question":"Nomor Terpilih: 314"},
+{"label":315,"value":315, "question":"Nomor Terpilih: 315"},
+{"label":316,"value":316, "question":"Nomor Terpilih: 316"},
+{"label":317,"value":317, "question":"Nomor Terpilih: 317"},
+{"label":318,"value":318, "question":"Nomor Terpilih: 318"},
+{"label":319,"value":319, "question":"Nomor Terpilih: 319"},
+{"label":320,"value":320, "question":"Nomor Terpilih: 320"},
+{"label":321,"value":321, "question":"Nomor Terpilih: 321"},
+{"label":322,"value":322, "question":"Nomor Terpilih: 322"},
+{"label":323,"value":323, "question":"Nomor Terpilih: 323"},
+{"label":324,"value":324, "question":"Nomor Terpilih: 324"},
+{"label":325,"value":325, "question":"Nomor Terpilih: 325"},
+{"label":326,"value":326, "question":"Nomor Terpilih: 326"},
+{"label":327,"value":327, "question":"Nomor Terpilih: 327"},
+{"label":328,"value":328, "question":"Nomor Terpilih: 328"},
+{"label":329,"value":329, "question":"Nomor Terpilih: 329"},
+{"label":330,"value":330, "question":"Nomor Terpilih: 330"},
+{"label":331,"value":331, "question":"Nomor Terpilih: 331"},
+{"label":332,"value":332, "question":"Nomor Terpilih: 332"},
+{"label":333,"value":333, "question":"Nomor Terpilih: 333"},
+{"label":334,"value":334, "question":"Nomor Terpilih: 334"},
+{"label":335,"value":335, "question":"Nomor Terpilih: 335"},
+{"label":336,"value":336, "question":"Nomor Terpilih: 336"},
+{"label":337,"value":337, "question":"Nomor Terpilih: 337"},
+{"label":338,"value":338, "question":"Nomor Terpilih: 338"},
+{"label":339,"value":339, "question":"Nomor Terpilih: 339"},
+{"label":340,"value":340, "question":"Nomor Terpilih: 340"},
+{"label":341,"value":341, "question":"Nomor Terpilih: 341"},
+{"label":342,"value":342, "question":"Nomor Terpilih: 342"},
+{"label":343,"value":343, "question":"Nomor Terpilih: 343"},
+{"label":344,"value":344, "question":"Nomor Terpilih: 344"},
+{"label":345,"value":345, "question":"Nomor Terpilih: 345"},
+{"label":346,"value":346, "question":"Nomor Terpilih: 346"},
+{"label":347,"value":347, "question":"Nomor Terpilih: 347"},
+{"label":348,"value":348, "question":"Nomor Terpilih: 348"},
+{"label":349,"value":349, "question":"Nomor Terpilih: 349"},
+{"label":350,"value":350, "question":"Nomor Terpilih: 350"},
+{"label":351,"value":351, "question":"Nomor Terpilih: 351"},
+{"label":352,"value":352, "question":"Nomor Terpilih: 352"},
+{"label":353,"value":353, "question":"Nomor Terpilih: 353"},
+{"label":354,"value":354, "question":"Nomor Terpilih: 354"},
+{"label":355,"value":355, "question":"Nomor Terpilih: 355"},
+{"label":356,"value":356, "question":"Nomor Terpilih: 356"},
+{"label":357,"value":357, "question":"Nomor Terpilih: 357"},
+{"label":358,"value":358, "question":"Nomor Terpilih: 358"},
+{"label":359,"value":359, "question":"Nomor Terpilih: 359"},
+{"label":360,"value":360, "question":"Nomor Terpilih: 360"},
+{"label":361,"value":361, "question":"Nomor Terpilih: 361"},
+{"label":362,"value":362, "question":"Nomor Terpilih: 362"},
+{"label":363,"value":363, "question":"Nomor Terpilih: 363"},
+{"label":364,"value":364, "question":"Nomor Terpilih: 364"},
+{"label":365,"value":365, "question":"Nomor Terpilih: 365"},
+{"label":366,"value":366, "question":"Nomor Terpilih: 366"},
+{"label":367,"value":367, "question":"Nomor Terpilih: 367"},
+{"label":368,"value":368, "question":"Nomor Terpilih: 368"},
+{"label":369,"value":369, "question":"Nomor Terpilih: 369"},
+{"label":370,"value":370, "question":"Nomor Terpilih: 370"},
+{"label":371,"value":371, "question":"Nomor Terpilih: 371"},
+{"label":372,"value":372, "question":"Nomor Terpilih: 372"},
+{"label":373,"value":373, "question":"Nomor Terpilih: 373"},
+{"label":374,"value":374, "question":"Nomor Terpilih: 374"},
+{"label":375,"value":375, "question":"Nomor Terpilih: 375"},
+{"label":376,"value":376, "question":"Nomor Terpilih: 376"},
+{"label":377,"value":377, "question":"Nomor Terpilih: 377"},
+{"label":378,"value":378, "question":"Nomor Terpilih: 378"},
+{"label":379,"value":379, "question":"Nomor Terpilih: 379"},
+{"label":380,"value":380, "question":"Nomor Terpilih: 380"},
+{"label":381,"value":381, "question":"Nomor Terpilih: 381"},
+{"label":382,"value":382, "question":"Nomor Terpilih: 382"},
+{"label":383,"value":383, "question":"Nomor Terpilih: 383"},
+{"label":384,"value":384, "question":"Nomor Terpilih: 384"},
+{"label":385,"value":385, "question":"Nomor Terpilih: 385"},
+{"label":386,"value":386, "question":"386"},
+{"label":387,"value":387, "question":"Nomor Terpilih: 387"},
+{"label":388,"value":388, "question":"Nomor Terpilih: 388"},
+{"label":389,"value":389, "question":"Nomor Terpilih: 389"},
+{"label":390,"value":390, "question":"Nomor Terpilih: 390"},
+{"label":391,"value":391, "question":"Nomor Terpilih: 391"},
+{"label":392,"value":392, "question":"Nomor Terpilih: 392"},
+{"label":393,"value":393, "question":"Nomor Terpilih: 393"},
+{"label":394,"value":394, "question":"Nomor Terpilih: 394"},
+{"label":395,"value":395, "question":"Nomor Terpilih: 395"},
+{"label":396,"value":396, "question":"Nomor Terpilih: 396"},
+{"label":397,"value":397, "question":"Nomor Terpilih: 397"},
+{"label":398,"value":398, "question":"Nomor Terpilih: 398"},
+{"label":399,"value":399, "question":"Nomor Terpilih: 399"},
+{"label":400,"value":400, "question":"Nomor Terpilih: 400"}
+        ];
+        var svg = d3.select('#chart')
+            .append("svg")
+            .data([data])
+            .attr("width",  w + padding.left + padding.right)
+            .attr("height", h + padding.top + padding.bottom);
+        var container = svg.append("g")
+            .attr("class", "chartholder")
+            .attr("transform", "translate(" + (w/2 + padding.left) + "," + (h/2 + padding.top) + ")");
+        var vis = container
+            .append("g");
+            
+        var pie = d3.layout.pie().sort(null).value(function(d){return 1;});
+        // declare an arc generator function
+        var arc = d3.svg.arc().outerRadius(r);
+        // select paths, use arc generator to draw
+        var arcs = vis.selectAll("g.slice")
+            .data(pie)
+            .enter()
+            .append("g")
+            .attr("class", "slice");
+            
+        arcs.append("path")
+            .attr("fill", function(d, i){ return color(i); })
+            .attr("d", function (d) { return arc(d); });
+        // add the text
+        arcs.append("text").attr("transform", function(d){
+                d.innerRadius = 0;
+                d.outerRadius = r;
+                d.angle = (d.startAngle + d.endAngle)/2;
+                return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius -10) +")";
+            })
+            .attr("text-anchor", "end")
+            .text( function(d, i) {
+                return data[i].label;
+            });
+        container.on("click", spin);
+        function spin(d){
+            
+            container.on("click", null);
+            //all slices have been seen, all done
+            console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+            if(oldpick.length == data.length){
+                console.log("done");
+                container.on("click", null);
+                return;
+            }
+            var  ps       = 360/data.length,
+                 pieslice = Math.round(1440/data.length),
+                 rng      = Math.floor((Math.random() * 1440) + 360);
+                
+            rotation = (Math.round(rng / ps) * ps);
+            
+            picked = Math.round(data.length - (rotation % 360)/ps);
+            picked = picked >= data.length ? (picked % data.length) : picked;
+            if(oldpick.indexOf(picked) !== -1){
+                d3.select(this).call(spin);
+                return;
+            } else {
+                oldpick.push(picked);
+            }
+            rotation += 90 - Math.round(ps/2);
+            vis.transition()
+                .duration(3000)
+                .attrTween("transform", rotTween)
+                .each("end", function(){
+                    //mark question as seen
+                    d3.select(".slice:nth-child(" + (picked + 1) + ") path")
+                        .attr("fill", "#111");
+                    //populate question
+                    d3.select("#question h1")
+                        .text(data[picked].question);
+                    oldrotation = rotation;
+              
+                    /* Get the result value from object "data" */
+                    console.log(data[picked].value)
+              
+                    /* Comment the below line for restrict spin to sngle time */
+                    container.on("click", spin);
+                });
+        }
+        //make arrow
+        svg.append("g")
+            .attr("transform", "translate(" + (w + padding.left + padding.right) + "," + ((h/2)+padding.top) + ")")
+            .append("path")
+            .attr("d", "M-" + (r*.15) + ",0L0," + (r*.05) + "L0,-" + (r*.05) + "Z")
+            .style({"fill":"black"});
+        //draw spin circle
+        container.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", 60)
+            .style({"fill":"white","cursor":"pointer"});
+        //spin text
+        container.append("text")
+            .attr("x", 0)
+            .attr("y", 15)
+            .attr("text-anchor", "middle")
+            .text("SPIN")
+            .style({"font-weight":"bold", "font-size":"30px"});
+        
+        
+        function rotTween(to) {
+          var i = d3.interpolate(oldrotation % 360, rotation);
+          return function(t) {
+            return "rotate(" + i(t) + ")";
+          };
+        }
+        
+        
+        function getRandomNumbers(){
+            var array = new Uint16Array(1000);
+            var scale = d3.scale.linear().range([360, 1440]).domain([0, 100000]);
+            if(window.hasOwnProperty("crypto") && typeof window.crypto.getRandomValues === "function"){
+                window.crypto.getRandomValues(array);
+                console.log("works");
+            } else {
+                //no support for crypto, get crappy random numbers
+                for(var i=0; i < 1000; i++){
+                    array[i] = Math.floor(Math.random() * 100000) + 1;
+                }
+            }
+            return array;
+        }
+	</script>
+	</body>
 </html>
