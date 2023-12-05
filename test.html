@@ -9,7 +9,8 @@
            url: "https://jdih.batam.go.id/dokumen-hukum/api/rekap-dokumen",
       }).done(
       function( data ) {
-         var data = JSON.parse(data);
+         var data = JSON.stringify(data);
+         data = JSON.parse(data);
          html = '<table><tr><td>BID</td><td>'+data.bid+'</td></table>';
          $('.result').html(html);
         });
