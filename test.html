@@ -11,7 +11,8 @@
       function( data ) {
          var data = JSON.stringify(data);
          data = JSON.parse(data);
-         html = '<table><tr><td>BID</td><td>'+data.bid+'</td></table>';
+         console.log(data);
+         html = '<table><tr><td>'+data.litigasi+'</td><td>'+data.total+'</td></table>';
          $('.result').html(html);
         });
      };
