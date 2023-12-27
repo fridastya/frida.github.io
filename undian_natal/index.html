@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Undian</title>
+        <style>
+            body {
+                display: block;
+                justify-content: center;
+                align-items: center;
+                font-family: system-ui;
+                height: 100vh;
+            }
+
+            #site-title {
+                text-align: center;
+                display: block;
+            }
+
+            button {
+                display: inline-flex;
+                border: none;
+                background: #1c1c1c;
+                color: #fff;
+                padding: 0.75rem 1.5rem;
+                border-radius: 6px;
+                font-family: inherit;
+                font-weight: 400;
+                font-size: 1rem;
+                cursor: pointer;
+                outline: none;
+  
+                &:focus {
+                    box-shadow: 0 0 0 4px rgba(#1c1c1c, .2);
+                }
+            }
+            
+            
+
+            div {
+                position: relative;
+                text-align: center;
+                font-size: 8vw;
+                background-color: white;
+                
+                .number {
+                    top: 10px;
+                    display: block;
+                    line-height: 0;
+                    font-weight: 700;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div style="padding-right: 10vh;">
+            <img src="gambar.jpeg" style="height: 100vh;">
+        </div>
+        <div style="top: -64vh; height: 31vh;">
+            <span class="number">0</span>
+            <button class="btn-start">Start</button>
+            <button class="btn-stop">Stop</button>
+        </div>
+        <script>
+            const numberEl = document.querySelector('.number')
+            const startBtn = document.querySelector('.btn-start')
+            const stopBtn = document.querySelector('.btn-stop')
+            let interval = null
+
+            const random = (max) => {
+                return Math.floor(Math.random() * max)
+            }
+
+            startBtn.addEventListener('click', () => {
+                interval = setInterval(() => {
+                    numberEl.innerHTML = random(5000)
+                }, 20)
+            })
+
+            stopBtn.addEventListener('click', () => {
+                clearInterval(interval)
+            })
+        </script>
+    </body>
+</html>
